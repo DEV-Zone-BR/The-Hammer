@@ -14,10 +14,11 @@ async def joined(ctx: discord, member: discord.Member):
 @commands.command()
 async def ban(ctx: discord, member: discord.Member):
     channel = [c for c in ctx.guild.channels if c.name.endswith('__geral')][0] or None
-    # await channel.send(':hammer:')
     roles = set([r.name for r in member.roles]) & ETERNAL_ROLES
+    print(roles)
     if len(roles) > 0:
         await ctx.send('Você não pode remover um membro do conselho', )
     else:
+        await channel.send(':hammer: {0.name} estava muito tempo sem dar um oi para os amigos'.format(member))
         await ctx.send('{0.name} foi removido por inatividade'.format(member))
-        # await ctx.guild.kick(member)
+        await ctx.guild.kick(member)
