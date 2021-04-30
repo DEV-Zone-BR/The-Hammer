@@ -7,7 +7,7 @@ from discord.ext import commands
 async def book_search(ctx: discord, book:str):
   
   try:
-    response = requests.get(f'https://plmcbks.amanoteam.com/search/books?query_name={book}&search_type=fast&page_number=0&max_items=5')
+    response = requests.get(f'https://plmcbks.amanoteam.com/search/books?query_name={book}&search_type=fast&page_number=0&max_items=3')
 
     print(response.status_code)
 
@@ -21,7 +21,7 @@ async def book_search(ctx: discord, book:str):
 
       for book in books:
 
-        await ctx.send(f'```Título: {book["title"]}\nCategoria:{book["category"]["name"]}\nAuthor:{book["author"]["name"]}```\nLink Para Download: https://plmcbks.amanoteam.com/view/{book["id"]}')        
+        await ctx.send(f'https://plmcbks.amanoteam.com/view/{book["id"]} \n ```Título: {book["title"]}\nCategoria:{book["category"]["name"]}\nAuthor:{book["author"]["name"]}```\n**Link Para Download**:https://plmcbks.amanoteam.com/download/{book["id"]}')        
 
       # https://plmcbks.amanoteam.com/view/13637
     
