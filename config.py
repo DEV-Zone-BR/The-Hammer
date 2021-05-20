@@ -6,9 +6,11 @@ from environs import Env
 env = Env()
 env.read_env()
 
-TOKEN = env('DISCORD_TOKEN')
+TOKEN = env("DISCORD_TOKEN")
 
-ETERNAL_ROLES = {'anbu', 'anbu+', 'Admin'}
+ETERNAL_ROLES = {"anbu", "anbu+", "Admin"}
+
+ALLOWED_ROLES = {"ban": ["admin", "anbu", "anbu+"]}
 
 intents = Intents.default()
 intents.members = True
