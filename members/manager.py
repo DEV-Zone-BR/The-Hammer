@@ -30,4 +30,3 @@ async def ban(ctx: discord, member: discord.Member):
             )
         )
         await ctx.send("{0.name} foi removido por inatividade".format(member))
-        await ctx.guild.kick(member)

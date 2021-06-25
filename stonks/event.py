@@ -54,7 +54,7 @@ class Handler:
 
         return BeautifulSoup(source_page, 'html.parser')
 
-    def get_price(self, parser) -> str:
+    async def get_price(self, parser) -> str:
         """Get price of your investment fund
 
         Keyword arguments:
@@ -64,6 +64,8 @@ class Handler:
             price = parser.select('div#stock-price-wrapper div#stock-price span.price')[0].string
             price_result = re.search(r'(R\$).(\d+.\d+)', price).group(2)
             if price_result is not None:
+                await self.ctx.send('Extraindo preço')
+
                 return price_result
 
             else:
@@ -72,7 +74,7 @@ class Handler:
         except (NoSuchElementException, TimeoutException):
             await self.ctx.send("O preço não foi encontrado na página")
 
-    def get_div_yield(self, parser) -> str:
+    async def get_div_yield(self, parser) -> str:
         """Get dividend yield of your investment fund
 
         Keyword arguments:
@@ -82,6 +84,8 @@ class Handler:
             div_yield = parser.select('div.carousel-cell.is-selected:nth-child(3) span.indicator-value')[0].string
             dividend_result = re.search(r'(\d{0,}[,.]{0,1}\d+%)', div_yield).group(1)
             if dividend_result is not None:
+                await self.ctx.send('Extraindo dividend yield')
+
                 return dividend_result
 
             else:
@@ -90,7 +94,7 @@ class Handler:
         except (NoSuchElementException, TimeoutException):
             await self.ctx.send("O dividend yield não foi encontrado na página")
 
-    def get_equity_value(self, parser) -> str:
+    async def get_equity_value(self, parser) -> str:
         """Get equity value of your investment fund
 
         Keyword arguments:
@@ -100,6 +104,8 @@ class Handler:
             equity_value = parser.select('div.carousel-cell.is-selected:nth-child(5) span.indicator-value')[0].string
             equity_value_result = re.search(r'(R\$).(\d+.\d+)', equity_value).group(2)
             if equity_value_result is not None:
+                await self.ctx.send('Extraindo valor patrimonial')
+
                 return equity_value_result
 
             else:
@@ -118,11 +124,12 @@ class Handler:
 
         return extracted_values
 
-    def handle(self):
+    async def handle(self):
         """Execute all functions"""
         if self.symbol_code:
             self.navigate()
             self.insert_value(self.symbol_code)
+            await self.ctx.send('Inserindo o código do FII')
 
             return self.get_values().format_values(self.symbol_code)
 
