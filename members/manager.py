@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-from stonks import Handler
 from config import ETERNAL_ROLES, ALLOWED_ROLES
 from authorization import check_member
 
@@ -32,11 +31,3 @@ async def ban(ctx: discord, member: discord.Member):
         )
         await ctx.send("{0.name} foi removido por inatividade".format(member))
         await ctx.guild.kick(member)
-
-
-@commands.command()
-async def stonks(ctx: discord, code: str):
-    result = Handler.handle(code)
-    ctx.send(f"{code} - preço: {result['preco']}"
-             f" - dividend yield {result['dividend_yield']}"
-             f" - valor_patrimonial {result['valor_patrimonial']}")

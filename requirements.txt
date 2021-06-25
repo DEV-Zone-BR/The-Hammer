@@ -20,3 +20,8 @@ urllib3==1.26.4
 yarl==1.6.3
 bs4==0.0.1
 chromedriver-binary==91.0.4472.19.0
+webdriver-manager==3.4.2
+configparser~=5.0.2
+selenium~=3.141.0
+colorama~=0.4.4
+setuptools~=49.2.1
