@@ -7,6 +7,6 @@ from config import TOKEN
 
 bot = commands.Bot(command_prefix='--')
 bot = members.init(bot)
-bot = job_vacancies.init(bot)
+# bot = job_vacancies.init(bot)z
 
 bot.run(TOKEN)

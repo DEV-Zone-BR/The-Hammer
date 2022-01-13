@@ -20,7 +20,8 @@ class MyClient(Client):
     async def on_member_join(self, member):
         guild = member.guild
         if guild.system_channel is not None:
-            to_send = 'Bem vindo {0.mention} ao {1.name}!'.format(member, guild)
+            to_send = 'Bem vindo {0.mention} ao {1.name}! \n O bot @Server Captcha Bot enviou uma mensagem para ' \
+                      'vocês verificarem um captcha'.format(member, guild)
             await guild.system_channel.send(to_send)
 
 

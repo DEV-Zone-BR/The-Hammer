@@ -17,7 +17,8 @@ async def ban(ctx: discord, member: discord.Member):
     if not await check_member(ctx, ALLOWED_ROLES["ban"]):
         return
 
-    channel = [c for c in ctx.guild.channels if c.name.endswith("__geral")][0] or None
+    channel = [c for c in ctx.guild.channels if c.name.endswith(
+        "__geral")][0] or None
     roles = set([r.name for r in member.roles]) & ETERNAL_ROLES
     print(roles)
     if len(roles) > 0:

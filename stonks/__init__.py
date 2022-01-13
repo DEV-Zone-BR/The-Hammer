@@ -22,7 +22,9 @@ class Handler:
     def __init__(self):
         options = Options()
         options.headless = True
-        self.driver = webdriver.Firefox(options=options, executable_path=GeckoDriverManager().install())
+        self.driver = webdriver.Firefox(
+            options=options,
+            executable_path=GeckoDriverManager().install())
 
     def navigate(self):
         self.driver.get(self.base_url)
@@ -36,15 +38,18 @@ class Handler:
         return BeautifulSoup(source_page, 'html.parser')
 
     def get_price(self, parser):
-        price = parser.select('div#stock-price-wrapper div#stock-price span.price')[0].string
+        price = parser.select(
+            'div#stock-price-wrapper div#stock-price span.price')[0].string
         return re.search(r'(R\$).(\d+.\d+)', price).group(2)
 
     def get_div_yield(self, parser):
-        div_yield = parser.select('div.carousel-cell.is-selected:nth-child(3) span.indicator-value')[0].string
+        div_yield = parser.select(
+            'div.carousel-cell.is-selected:nth-child(3) span.indicator-value')[0].string
         return re.search(r'(\d{0,}[,.]{0,1}\d+%)', div_yield).group(1)
 
     def get_equity_value(self, parser):
-        equity_value = parser.select('div.carousel-cell.is-selected:nth-child(5) span.indicator-value')[0].string
+        equity_value = parser.select(
+            'div.carousel-cell.is-selected:nth-child(5) span.indicator-value')[0].string
         return re.search(r'(R\$).(\d+.\d+)', equity_value).group(2)
 
     def get_values(self) -> StonksResult:
@@ -60,5 +65,3 @@ class Handler:
         self.navigate()
         self.insert_value(symbol_code)
         return self.get_values()
-
-
